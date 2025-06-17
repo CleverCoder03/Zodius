@@ -12,21 +12,26 @@ gsap.registerPlugin(ScrollTrigger);
 const Hero = () => {
   const [currentIndex, setCurrentIndex] = useState(1);
   const [hasClicked, setHasClicked] = useState(false);
-  // const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
   const [loadedVideos, setLoadedVideos] = useState(0);
 
   const totalVideos = 4;
   const nextVideoRef = useRef(null);
 
   const handleVideoLoad = () => {
-    setLoadedVideos((prev) => prev + 1);
+    setLoadedVideos((prev) => prev +1);
   };
 
-  // useEffect(() => {
-  //   if (loadedVideos === totalVideos -1) {
-  //     setLoading(false);
-  //   }
-  // }, [loadedVideos]);
+  useEffect(() => {
+  setLoadedVideos(0);
+  setLoading(true);
+}, []);
+
+  useEffect(() => {
+    if (loadedVideos >= totalVideos -1 ) {
+      setLoading(false);
+    }
+  }, [loadedVideos]);
 
   const upcomingVideoIndex = (currentIndex % totalVideos) + 1;
 
@@ -86,8 +91,8 @@ const Hero = () => {
   const getVideoSrc = (index) => `videos/hero-${index}.mp4`;
 
   return (
-    <div className="relative h-dvh w-screen overflow-x-hidden">
-      {/* {loading && (
+    <>
+    {loading && (
         <div className="flex-center absolute z-[100] h-dvh w-screen overflow-hidden bg-violet-50">
           <div className="three-body">
             <div className="three-body__dot"></div>
@@ -95,7 +100,8 @@ const Hero = () => {
             <div className="three-body__dot"></div>
           </div>
         </div>
-      )} */}
+      )}
+    <div className="relative h-dvh w-screen overflow-x-hidden">
       <div
         id="video-frame"
         className="relative z-10 h-dvh w-screen overflow-hidden rounded-lg bg-blue-75"
@@ -162,6 +168,7 @@ const Hero = () => {
         G<b>a</b>ming
       </h1>
     </div>
+    </>
   );
 };
 
