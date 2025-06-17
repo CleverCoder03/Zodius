@@ -1,12 +1,12 @@
-const isProd = process.env.NODE_ENV === 'production';
+// const isProd = process.env.NODE_ENV === 'production';
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    basePath: isProd ? '/Zodius' : '',
-  assetPrefix: isProd ? '/Zodius/' : '',
-  images: {
-    unoptimized: true, // Required for static hosting like GitHub Pages
-  },
+//     basePath: isProd ? '/Zodius' : '',
+//   assetPrefix: isProd ? '/Zodius/' : '',
+//   images: {
+//     unoptimized: true, // Required for static hosting like GitHub Pages
+//   },
 };
 
 
