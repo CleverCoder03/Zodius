@@ -4,6 +4,8 @@ import Navbar from '@/components/Navbar'
 import React from 'react'
 import Features from '../components/Features'
 import Story from '@/components/Story'
+import Contact from '@/components/Contact'
+import Footer from '@/components/Footer'
 
 const page = () => {
   return (
@@ -13,6 +15,8 @@ const page = () => {
       <About />
       <Features />
       <Story />
+      <Contact />
+      <Footer />
     </main>
   )
 }
