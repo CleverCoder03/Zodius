@@ -85,7 +85,7 @@ const Navbar = () => {
         <nav className="flex size-full items-center justify-between p-4">
           <div className="flex items-center gap-7">
             <div className="relative w-10 h-10">
-              <Image src="/img/logo.png" alt="Logo" fill />
+              <Image src="/img/logo.png" alt="Logo" fill priority/>
             </div>
             <Button
               id="product-button"
