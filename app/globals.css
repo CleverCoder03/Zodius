@@ -107,6 +107,11 @@ body{
     will-change: opacity, transform;
   }
 
+  .animated-word b{
+    font-family: "Zentry";
+    font-feature-settings: "ss01" on;
+  }
+
   .bento-tilt_1 {
     @apply relative border border-white/20 col-span-2 overflow-hidden rounded-md transition-transform duration-300 ease-out;
   }

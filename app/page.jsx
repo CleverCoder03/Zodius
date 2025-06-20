@@ -3,6 +3,7 @@ import Hero from '@/components/Hero'
 import Navbar from '@/components/Navbar'
 import React from 'react'
 import Features from '../components/Features'
+import Story from '@/components/Story'
 
 const page = () => {
   return (
@@ -11,6 +12,7 @@ const page = () => {
       <Hero />
       <About />
       <Features />
+      <Story />
     </main>
   )
 }
