@@ -3,11 +3,39 @@ import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
 import Button from "./Button";
 import { TiLocationArrow } from "react-icons/ti";
-import { Play } from "next/font/google";
+import { useWindowScroll } from "react-use";
+import gsap from "gsap";
 
 const Navbar = () => {
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
   const [isIndicatorActive, setIsIndicatorActive] = useState(false);
+  const [lastScrollY, setLastScrollY] = useState(0);
+  const [isNavVisible, setIsNavVisible] = useState(true);
+
+  const { y: currentScrollY } = useWindowScroll();
+
+  useEffect(() => {
+    if(currentScrollY === 0){
+      setIsNavVisible(true)
+      navContainerRef.current.classList.remove('floating-nav')
+    }else if (currentScrollY > lastScrollY){
+      setIsNavVisible(false)
+      navContainerRef.current.classList.add('floating-nav')
+    }else if(currentScrollY < lastScrollY){
+      setIsNavVisible(true)
+      navContainerRef.current.classList.add('floating-nav')
+    }
+
+    setLastScrollY(currentScrollY, lastScrollY)
+  }, [currentScrollY]);
+
+  useEffect(()=>{
+    gsap.to(navContainerRef.current, {
+      y: isNavVisible ? 0 : -100,
+      opacity: isNavVisible ? 1 : 0,
+      duration: 0.3
+    })
+  }, [isNavVisible])
 
   const navContainerRef = useRef(null);
   const audioElementRef = useRef(null);
@@ -17,13 +45,13 @@ const Navbar = () => {
     setIsIndicatorActive((prev) => !prev);
   };
 
-  useEffect(()=>{
-    if (isAudioPlaying){
-      audioElementRef.current.play()
-    }else{
-      audioElementRef.current.pause()
+  useEffect(() => {
+    if (isAudioPlaying) {
+      audioElementRef.current.play();
+    } else {
+      audioElementRef.current.pause();
     }
-  },[isAudioPlaying])
+  }, [isAudioPlaying]);
 
   const navItems = [
     {
@@ -88,15 +116,15 @@ const Navbar = () => {
                 className="hidden"
                 loop
               />
-                {[1, 2, 3, 4].map((bar) => (
-                  <div
-                    key={bar}
-                    className={`indicator-line ${
-                      isIndicatorActive ? "active" : ""
-                    }`}
-                    style={{ animationDelay: `${bar * 0.2}s` }}
-                  ></div>
-                ))}
+              {[1, 2, 3, 4].map((bar) => (
+                <div
+                  key={bar}
+                  className={`indicator-line ${
+                    isIndicatorActive ? "active" : ""
+                  }`}
+                  style={{ animationDelay: `${bar * 0.2}s` }}
+                ></div>
+              ))}
             </button>
           </div>
         </nav>
